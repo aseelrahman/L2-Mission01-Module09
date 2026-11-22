@@ -44,11 +44,11 @@ const loginUserIntoDB = async (payload: {
     email: user.rows[0].email,
   };
 
-  const assessToken = jwt.sign(jwtPayload, "alergtgkaruyfgldasif", {
+  const accessToken = jwt.sign(jwtPayload, "alergtgkaruyfgldasif", {
     expiresIn: "1d",
   });
 
-  return { assessToken, user: user.rows[0] };
+  return { accessToken, user: user.rows[0] };
 };
 
 export const authService = {
