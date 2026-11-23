@@ -42,6 +42,9 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
       message: "Forbidden!!",
     });
   }
+  req.user = decode;
+
+  console.log(req);
   next();
 };
 
