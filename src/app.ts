@@ -8,13 +8,21 @@ import { userRoute } from "./modules/users/user.route";
 import { profileRoute } from "./modules/profile/profile.route";
 import { authRoute } from "./modules/auth/auth.route";
 import logger from "./middleware/logger";
+import globalErrorHandler from "./middleware/globalErrorHandler";
+import cors from "cors"
 
 const app: Application = express();
 
+const corsOptions = {
+  origin: ["http://localhost:30}00"],
+  optionsSuccessStatus: 200, 
+};
+
+app.use(cors(corsOptions))
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
-app.use(logger)
+app.use(logger);
 
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/profile", profileRoute);
@@ -27,5 +35,8 @@ app.get("/", (req: Request, res: Response) => {
     author: "PH",
   });
 });
+
+//Global Error Handling Middleware
+app.use(globalErrorHandler);
 
 export default app;
